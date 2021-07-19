@@ -50,6 +50,13 @@ CRGB leds[NUM_LEDS];
 
 
 
+//If a GET request is made to a page that does not exist on the webserver, return a 404 error.
+void notFound(AsyncWebServerRequest *request) {                                
+  request->send(404, "text/plain", "Not found");                                
+}   
+
+
+
 //Arduino Setup Function
 void setup() {
   // Start Serial Communication. (for debug logging only)
@@ -69,7 +76,7 @@ void setup() {
   //Initialize the eeprom and read the phone values from memory
   //Begin the eeprom communication with an allocation of 512 bytes.
   EEPROM.begin(512);
-  loadConfigFromEEPROM();
+  //loadConfigFromEEPROM();
 
 
 
@@ -84,13 +91,8 @@ void setup() {
 
   //When landing on the ip address, send index.html to client.
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
-#ifdef NO_GZIP
-	request->send_P(200, "text/html", INDEX_HTML);
-#else
-	AsyncWebServerResponse *response = request->beginResponse_P(200, "text/html", INDEX_HTML_GZ, INDEX_HTML_GZ_LENGTH);
-  	response->addHeader("Content-Encoding","gzip");
-  	request->send(response);
-#endif
+	request->send_P(200, "text/html", "INDEX_HTML");                  ///!!!!! CHANGE THIS TO THE PROGMEM STRING LATER instead of "INDEX_HTML"
+
   });
 
   //Now that setup is complete, start the web server.
