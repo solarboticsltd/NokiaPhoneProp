@@ -20,9 +20,10 @@
 #define FASTLED_INTERRUPT_RETRY_COUNT 0
 #include <FastLED.h>
 
+#include <SPI.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_PCD8544.h>
-
+Adafruit_PCD8544 display = Adafruit_PCD8544(D1, D2, D5, D6, D7);
 
 //Define the Webserver, DNS, and UDP Objects
 AsyncWebServer server(80);
@@ -36,6 +37,21 @@ DNSServer dns;
 #define BRIGHT 255
 #define DIM 64
 CRGB leds[NUM_LEDS];
+
+
+//A struct that holds the variables we will save to
+//eeprom when the user updates them through the website
+struct config_t
+{
+  int page = 1;
+  int contrast = 50;
+  int ringCount = 3;
+  int hours = 12;
+  int minutes = 30;
+  char PhoneNumber[11];
+  char callID[128];
+}; struct config_t configuration;
+
 
 
 //Important Notes:
