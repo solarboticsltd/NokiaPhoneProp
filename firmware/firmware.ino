@@ -1,5 +1,5 @@
 //******************************************************************************//
-//************************* Shadow Clock Firmware ******************************//
+//************************** Nokia Phone Firmware ******************************//
 //******************************************************************************//
 //Arduino Library - standard
 #include <Arduino.h>
@@ -26,7 +26,7 @@ AsyncWebServer server(80);
 DNSServer dns;
 
 
-//Define the Clocks LED count, data pin, LED brightness levels,
+//Define the Phone LED count, data pin, LED brightness levels,
 //and FastLED object.
 #define NUM_LEDS 60
 #define DATA_PIN 12
@@ -54,7 +54,7 @@ void setup() {
 
 
 
-  //Initialize the FastLED object that will handle the clock LEDs               
+  //Initialize the FastLED object that will handle the phone LEDs               
   FastLED.addLeds<WS2812B, DATA_PIN, RGB>(leds, NUM_LEDS);
   //Set LED brightness to "Bright".
   FastLED.setBrightness(BRIGHT);
@@ -63,15 +63,15 @@ void setup() {
 
 
 
-  //Initialize the eeprom and read the clock values from memory
+  //Initialize the eeprom and read the phone values from memory
   //Begin the eeprom communication with an allocation of 512 bytes.
   EEPROM.begin(512);
   loadConfigFromEEPROM();
 
 
 
-  //If the wifiManager is not configured before the timeout is hit, the softAP mode is started so the shadow clock can be configured.
-  WiFi.softAP("Shadow Clock AP", "solarbotics");
+  //start the phone is AP mode as we will not connect it to a local wifi network
+  WiFi.softAP("Nokia Prop Phone", "solarbotics");
   Serial.println("WIFI: Fallback AP Mode Started");
   Serial.println("");
   //This assists with the jittering experienced when the web server interrupts the FastLed data string. Why? Great question... This is what happens when I don't save my links to stack overflow...
@@ -107,7 +107,7 @@ void loop() {
 
 
 //LED Control Functions:
-//These functions are a quick and easy way to turn off/on all the LEDs of each ring.
+//These functions are a quick and easy way to turn off/on all the LEDs.
 void ledsOff() {
   FastLED.clear(true);
 }
