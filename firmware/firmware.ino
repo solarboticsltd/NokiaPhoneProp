@@ -66,7 +66,9 @@ void setup() {
   // Start Serial Communication. (for debug logging only)
   Serial.begin(115200);
 
-
+  display.begin();
+  display.setContrast(50);
+  display.clearDisplay();   // clears the screen and buffer
 
   //Initialize the FastLED object that will handle the phone LEDs               
   FastLED.addLeds<WS2812B, DATA_PIN, RGB>(leds, NUM_LEDS);
@@ -106,11 +108,20 @@ void setup() {
 
 
 
-
 //Main loop
 void loop() {
 
-
+drawSignal(4);
+delay(1000);
+drawSignal(3);
+delay(1000);
+drawSignal(2);
+delay(1000);
+drawSignal(1);
+delay(1000);
+drawSignal(0);
+delay(1000);
+  
 }
 
 
@@ -127,4 +138,38 @@ void allOn() {
     leds[i] = CRGB::White;
   }
   FastLED.show();
+}
+
+
+
+void drawSignal(int lvl)
+{
+  //Clear the signal bars
+  display.fillRect(0,0,8,31,WHITE); 
+  
+  //Draw the signal icon (could be a bitmap but meh, this is faster dev-wise)
+  display.drawFastHLine(0,32,5,BLACK);
+  display.drawFastHLine(1,34,3,BLACK);
+  display.drawFastVLine(0,32,3,BLACK);
+  display.drawFastVLine(2,32,6,BLACK);
+  display.drawFastVLine(4,32,3,BLACK);
+
+  //Depending on signal level, draw the signal bars
+  if(lvl > 0)
+  {
+    display.fillRect(0,24,2,7,BLACK);
+  }
+  if(lvl > 1)
+  {
+    display.fillRect(0,16,2,7,BLACK);
+  }
+  if(lvl > 2)
+  {
+    display.fillRect(0,8,3,7,BLACK);
+  }
+  if(lvl > 3)
+  {
+    display.fillRect(0,0,4,7,BLACK);
+  }  
+  display.display();
 }
