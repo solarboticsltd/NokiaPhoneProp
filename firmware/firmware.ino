@@ -113,7 +113,7 @@ void setup() {
 //Main loop
 void loop() {
 
-drawPhoneNum("4039693120");
+drawText("4039693120", 8, 8);
 delay(1000);
 drawSignal(4);
 drawBattery(4);
@@ -216,11 +216,11 @@ void drawBattery(int lvl)
   display.display();
 }
 
-void drawPhoneNum(String number)
+void drawText(String text, int x, int y)
 {
   display.setTextSize(1);
   display.setTextColor(BLACK);
-  display.setCursor(8,8);
-  display.println(number);
+  display.setCursor(x,y);
+  display.println(text);
   display.display();
 }
