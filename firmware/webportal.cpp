@@ -4,6 +4,7 @@
 #include "webportal.h"
 
 
+
 //Send nokia settings to the webpage
 void getWebValues(AsyncWebServerRequest *request)
 {
@@ -28,6 +29,7 @@ void getWebValues(AsyncWebServerRequest *request)
   serializeJson(doc, response);
   request->send(200, "application/json", response);
 }
+
 
 
 //Recieve nokia settings from the webpage and store them in memory
@@ -78,7 +80,18 @@ void postWebValues(AsyncWebServerRequest *request, JsonVariant &json) {
   }   
 
   //Raise the update flag so the eeprom is updated with the config values
-  doUpdateConfig = true;
+  doConfigUpdate = true;
   //Send the config values back to the webpage
   getWebValues(request);
+}
+
+
+
+//Recieve a demo request from website and verify JSON payload
+void putCall(AsyncWebServerRequest *request) {
+  Serial.println("WEB: Call Requested");
+
+  doCall = true;
+  
+  request->send(200);
 }
