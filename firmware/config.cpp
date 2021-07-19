@@ -7,6 +7,8 @@
 const String DEFAULT_PHONE_NUMBER = "14032326268";
 const String DEFAULT_CALLER_ID = "SolarboticsLtd";
 
+struct config_t configuration;
+
 unsigned long crc32(uint8_t *buf, size_t len) {
 	const unsigned long crc_table[16] = {
 		0x00000000, 0x1db71064, 0x3b6e20c8, 0x26d930ac,

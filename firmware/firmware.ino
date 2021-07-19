@@ -80,7 +80,7 @@ void setup() {
   //Initialize the eeprom and read the phone values from memory
   //Begin the eeprom communication with an allocation of 512 bytes.
   EEPROM.begin(512);
-  //loadConfigFromEEPROM();
+  loadConfigFromEEPROM();
 
 
 
