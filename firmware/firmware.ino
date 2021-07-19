@@ -203,5 +203,25 @@ void drawText(String text, int x, int y)
   display.setTextColor(BLACK);
   display.setCursor(x,y);
   display.println(text);
+}
+
+void drawTime(int hours, int minutes, int x, int y)
+{
+  String displayTime = String(hours) + ":" + String(minutes);
+
+  display.setTextSize(1);
+  display.setTextColor(BLACK);
+  display.setCursor(x,y);
+  display.println(displayTime);
+}
+
+
+void drawMenu(){
+  display.clearDisplay();
+  drawBattery(configuration.batLevel);
+  drawSignal(configuration.sigLevel);
+  drawText("NOKIA",28,23);
+  drawText("Menu",30,45); 
+  drawTime(configuration.hours, configuration.minutes, 50, 7);
   display.display();
 }
