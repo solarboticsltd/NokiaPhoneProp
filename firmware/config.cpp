@@ -9,6 +9,9 @@ const String DEFAULT_CALLER_ID = "SolarboticsLtd";
 
 struct config_t configuration;
 
+//Define a flag for when config data should be updated in EEPROM
+bool doUpdateConfig = false;
+
 unsigned long crc32(uint8_t *buf, size_t len) {
 	const unsigned long crc_table[16] = {
 		0x00000000, 0x1db71064, 0x3b6e20c8, 0x26d930ac,
@@ -58,7 +61,6 @@ void factoryResetEEPROM(){
 
   Serial.println("FACTORY RESET: Resetting config and commiting to eeprom");
   
-  configuration.page = 1;
   configuration.contrast = 50;
   configuration.ringCount = 8;
   configuration.batLevel = 4;

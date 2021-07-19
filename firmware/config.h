@@ -11,7 +11,6 @@ extern const String DEFAULT_CALLER_ID;
 struct config_t
 {
   unsigned long checksum;
-  int page = 1;
   int contrast = 50;
   int ringCount = 8;
   int batLevel = 4;
@@ -19,11 +18,13 @@ struct config_t
   int hours = 17;
   int minutes = 56;
   char phoneNumber[16];
-  char callID[128];
+  char callID[16];
 }; 
 
 extern struct config_t configuration;
 
+//Define a flag for when config data should be updated in EEPROM
+extern bool doUpdateConfig;
 
 void saveConfigToEEPROM();
 void loadConfigFromEEPROM();

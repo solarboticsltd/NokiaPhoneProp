@@ -17,6 +17,8 @@
 
 //Include project files (split for readability)
 #include "config.h"
+#include "rest.h"
+#include "webportal.h"
 
 //LED Control Library
 //#define FASTLED_ALLOW_INTERRUPTS 0
@@ -52,13 +54,6 @@ CRGB leds[NUM_LEDS];
 // to:
 // template <int DATA_PIN, int T1, int T2, int T3, EOrder RGB_ORDER = RGB, int XTRA0 = 0, bool FLIP = false, int WAIT_TIME = 5>
 // Then the problem solved...
-
-
-
-//If a GET request is made to a page that does not exist on the webserver, return a 404 error.
-void notFound(AsyncWebServerRequest *request) {                                
-  request->send(404, "text/plain", "Not found");                                
-}   
 
 
 
@@ -241,6 +236,7 @@ void drawCall(){
     if(i % 2 != 0)
     {
       drawText(String(configuration.phoneNumber), 12, 15);
+      
     }
     
     display.display();
