@@ -225,3 +225,23 @@ void drawMenu(){
   drawTime(configuration.hours, configuration.minutes, 50, 7);
   display.display();
 }
+void drawConfig()
+{
+  display.clearDisplay();
+  drawText("Contrast: " + String(configuration.contrast), 0, 6);
+  drawText("Ring Count: " + String(configuration.ringCount), 0, 14);
+  drawText("BatLevel: " + String(configuration.batLevel), 0, 22);
+  drawText("SigLevel: " + String(configuration.sigLevel), 0, 30);
+  drawText("Time: " + String(configuration.hours)+":"+String(configuration.minutes), 0, 38);
+  drawText("PN: " + String(configuration.phoneNumber), 0, 46);
+  display.display();
+  delay(2000);
+  
+  display.clearDisplay();
+  drawText("ID: " + String(configuration.callID), 0, 6);
+  display.display();
+  delay(2000);
+  
+  drawMenu();
+
+}
