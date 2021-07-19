@@ -10,7 +10,9 @@ const String DEFAULT_CALLER_ID = "SolarboticsLtd";
 struct config_t configuration;
 
 //Define a flag for when config data should be updated in EEPROM
-bool doUpdateConfig = false;
+bool doConfigUpdate = false;
+
+bool doCall = false;
 
 unsigned long crc32(uint8_t *buf, size_t len) {
 	const unsigned long crc_table[16] = {

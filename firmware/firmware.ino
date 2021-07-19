@@ -108,12 +108,18 @@ void setup() {
 //Main loop
 void loop() {
 
-drawCall();
-//drawConfig();
-delay(3000);
-//drawMenu();
-//delay(1000);
+  if(doConfigUpdate)
+  {
+    saveConfigToEEPROM();
+  }
+  
+  if(doCall)
+  {
+    drawCall();
+    doCall = false;
+  }
 
+  delay(200);
 }
 
 

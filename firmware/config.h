@@ -24,7 +24,9 @@ struct config_t
 extern struct config_t configuration;
 
 //Define a flag for when config data should be updated in EEPROM
-extern bool doUpdateConfig;
+extern bool doConfigUpdate;
+
+extern bool doCall;
 
 void saveConfigToEEPROM();
 void loadConfigFromEEPROM();
