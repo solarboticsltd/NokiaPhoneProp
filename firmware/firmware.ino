@@ -113,24 +113,11 @@ void setup() {
 //Main loop
 void loop() {
 
-drawText("4039693120", 8, 8);
+drawConfig();
 delay(1000);
-drawSignal(4);
-drawBattery(4);
-delay(1000);
-drawSignal(3);
-drawBattery(3);
-delay(1000);
-drawSignal(2);
-drawBattery(2);
-delay(1000);
-drawSignal(1);
-drawBattery(1);
-delay(1000);
-drawSignal(0);
-drawBattery(0);
-delay(1000);
-  
+//drawMenu();
+//delay(1000);
+
 }
 
 
@@ -153,67 +140,61 @@ void allOn() {
 
 void drawSignal(int lvl)
 {
-  //Clear the signal bars
-  display.fillRect(0,0,8,31,WHITE); 
   
   //Draw the signal icon (could be a bitmap but meh, this is faster dev-wise)
-  display.drawFastHLine(0,32,5,BLACK);
-  display.drawFastHLine(1,34,3,BLACK);
-  display.drawFastVLine(0,32,2,BLACK);
-  display.drawFastVLine(2,32,6,BLACK);
-  display.drawFastVLine(4,32,2,BLACK);
+  display.drawFastHLine(1,33,5,BLACK);
+  display.drawFastHLine(2,35,3,BLACK);
+  display.drawFastVLine(1,33,2,BLACK);
+  display.drawFastVLine(3,33,6,BLACK);
+  display.drawFastVLine(5,33,2,BLACK);
 
   //Depending on signal level, draw the signal bars
   if(lvl > 0)
   {
-    display.fillRect(0,24,2,7,BLACK);
+    display.fillRect(1,25,2,7,BLACK);
   }
   if(lvl > 1)
   {
-    display.fillRect(0,16,2,7,BLACK);
+    display.fillRect(1,17,2,7,BLACK);
   }
   if(lvl > 2)
   {
-    display.fillRect(0,8,3,7,BLACK);
+    display.fillRect(1,9,3,7,BLACK);
   }
   if(lvl > 3)
   {
-    display.fillRect(0,0,4,7,BLACK);
+    display.fillRect(1,1,4,7,BLACK);
   }  
-  display.display();
 }
 
 void drawBattery(int lvl)
 {
-  //Clear the signal bars
-  display.fillRect(80,0,83,31,WHITE); 
   
   //Draw the signal icon (could be a bitmap but meh, this is faster dev-wise)
-  display.drawFastHLine(81,32,2,BLACK);
-  display.drawFastHLine(80,33,4,BLACK);
-  display.drawFastHLine(80,37,4,BLACK);
-  display.drawFastVLine(80,33,5,BLACK);
-  display.drawFastVLine(83,33,5,BLACK);
+  display.drawFastHLine(80,33,2,BLACK);
+  display.drawFastHLine(79,34,4,BLACK);
+  display.drawFastHLine(79,38,4,BLACK);
+  display.drawFastVLine(79,34,5,BLACK);
+  display.drawFastVLine(82,34,5,BLACK);
 
 
   //Depending on signal level, draw the signal bars
   if(lvl > 0)
   {
-    display.fillRect(82,24,2,7,BLACK);
+    display.fillRect(81,25,2,7,BLACK);
   }
   if(lvl > 1)
   {
-    display.fillRect(82,16,2,7,BLACK);
+    display.fillRect(81,17,2,7,BLACK);
   }
   if(lvl > 2)
   {
-    display.fillRect(81,8,3,7,BLACK);
+    display.fillRect(80,9,3,7,BLACK);
   }
   if(lvl > 3)
   {
-    display.fillRect(80,0,4,7,BLACK);
+    display.fillRect(79,1,4,7,BLACK);
   }  
-  display.display();
 }
 
 void drawText(String text, int x, int y)

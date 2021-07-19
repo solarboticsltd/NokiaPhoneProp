@@ -16,6 +16,8 @@ struct config_t
   int ringCount = 3;
   int batLevel = 4;
   int sigLevel = 4;
+  int batLevel = 2;
+  int sigLevel = 2;
   int hours = 12;
   int minutes = 30;
   char phoneNumber[16];

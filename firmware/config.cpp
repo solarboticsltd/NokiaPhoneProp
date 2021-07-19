@@ -63,6 +63,8 @@ void factoryResetEEPROM(){
   configuration.ringCount = 3;
   configuration.batLevel = 4;
   configuration.sigLevel = 4;
+  configuration.batLevel = 2;
+  configuration.sigLevel = 2;
   configuration.hours = 12;
   configuration.minutes = 30;
   DEFAULT_PHONE_NUMBER.toCharArray(configuration.phoneNumber, DEFAULT_PHONE_NUMBER.length()+1);
