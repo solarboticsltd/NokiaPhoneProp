@@ -115,6 +115,9 @@ void loop() {
 
 drawConfig();
 delay(1000);
+drawCall();
+//drawConfig();
+delay(3000);
 //drawMenu();
 //delay(1000);
 
@@ -225,6 +228,30 @@ void drawMenu(){
   drawTime(configuration.hours, configuration.minutes, 50, 7);
   display.display();
 }
+
+void drawCall(){
+  
+  for(int i = 1; i < (configuration.ringCount * 2 + 1); i++)
+  {
+    display.clearDisplay();
+    drawBattery(configuration.batLevel);
+    drawSignal(configuration.sigLevel);
+    drawTime(configuration.hours, configuration.minutes, 50, 7);
+    drawText(String(configuration.callID), 6, 31);
+    drawText("Answer", 25, 45);
+    
+    if(i % 2 != 0)
+    {
+      drawText(String(configuration.phoneNumber), 12, 15);
+    }
+    
+    display.display();
+    delay(400);
+  }
+  
+  drawMenu();
+}
+
 void drawConfig()
 {
   display.clearDisplay();
