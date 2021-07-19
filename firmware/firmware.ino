@@ -25,6 +25,7 @@
 
 #include <SPI.h>
 #include <Adafruit_GFX.h>
+#include <Fonts/nokiafc224pt7b.h>
 #include <Adafruit_PCD8544.h>
 Adafruit_PCD8544 display = Adafruit_PCD8544(D1, D2, D5, D6, D7);
 
@@ -68,6 +69,7 @@ void setup() {
 
   display.begin();
   display.setContrast(50);
+  display.setFont(&nokiafc224pt7b);
   display.clearDisplay();   // clears the screen and buffer
 
   //Initialize the FastLED object that will handle the phone LEDs               
@@ -111,6 +113,8 @@ void setup() {
 //Main loop
 void loop() {
 
+drawPhoneNum("4039693120");
+delay(1000);
 drawSignal(4);
 drawBattery(4);
 delay(1000);
@@ -209,5 +213,14 @@ void drawBattery(int lvl)
   {
     display.fillRect(80,0,4,7,BLACK);
   }  
+  display.display();
+}
+
+void drawPhoneNum(String number)
+{
+  display.setTextSize(1);
+  display.setTextColor(BLACK);
+  display.setCursor(8,8);
+  display.println(number);
   display.display();
 }
