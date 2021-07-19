@@ -113,8 +113,6 @@ void setup() {
 //Main loop
 void loop() {
 
-drawConfig();
-delay(1000);
 drawCall();
 //drawConfig();
 delay(3000);

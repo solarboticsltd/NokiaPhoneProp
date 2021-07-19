@@ -60,13 +60,11 @@ void factoryResetEEPROM(){
   
   configuration.page = 1;
   configuration.contrast = 50;
-  configuration.ringCount = 3;
+  configuration.ringCount = 8;
   configuration.batLevel = 4;
   configuration.sigLevel = 4;
-  configuration.batLevel = 2;
-  configuration.sigLevel = 2;
-  configuration.hours = 12;
-  configuration.minutes = 30;
+  configuration.hours = 17;
+  configuration.minutes = 56;
   DEFAULT_PHONE_NUMBER.toCharArray(configuration.phoneNumber, DEFAULT_PHONE_NUMBER.length()+1);
   DEFAULT_CALLER_ID.toCharArray(configuration.callID, DEFAULT_CALLER_ID.length()+1);
 

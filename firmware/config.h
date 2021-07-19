@@ -13,13 +13,11 @@ struct config_t
   unsigned long checksum;
   int page = 1;
   int contrast = 50;
-  int ringCount = 3;
+  int ringCount = 8;
   int batLevel = 4;
   int sigLevel = 4;
-  int batLevel = 2;
-  int sigLevel = 2;
-  int hours = 12;
-  int minutes = 30;
+  int hours = 17;
+  int minutes = 56;
   char phoneNumber[16];
   char callID[128];
 }; 
