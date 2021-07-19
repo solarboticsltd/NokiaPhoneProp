@@ -14,6 +14,8 @@ struct config_t
   int page = 1;
   int contrast = 50;
   int ringCount = 3;
+  int batLevel = 4;
+  int sigLevel = 4;
   int hours = 12;
   int minutes = 30;
   char phoneNumber[16];
