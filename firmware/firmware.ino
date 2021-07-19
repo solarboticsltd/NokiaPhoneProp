@@ -20,6 +20,9 @@
 #define FASTLED_INTERRUPT_RETRY_COUNT 0
 #include <FastLED.h>
 
+#include <Adafruit_GFX.h>
+#include <Adafruit_PCD8544.h>
+
 
 //Define the Webserver, DNS, and UDP Objects
 AsyncWebServer server(80);
