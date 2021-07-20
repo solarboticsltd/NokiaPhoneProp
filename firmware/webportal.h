@@ -6,6 +6,6 @@
 
 void postWebValues(AsyncWebServerRequest*, JsonVariant&);
 void getWebValues(AsyncWebServerRequest*);
-void putCall(AsyncWebServerRequest*, JsonVariant&);
+void putCall(AsyncWebServerRequest*);
 
 #endif

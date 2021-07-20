@@ -98,9 +98,20 @@ void setup() {
 
   });
 
+  //Config Web Handlers. Refer to webportal.cpp for function details.
+  server.on("/config", HTTP_GET, getWebValues);
+  server.on("/call", HTTP_PUT, putCall);
+
+  AsyncCallbackJsonWebHandler* configPOSTHandler = new AsyncCallbackJsonWebHandler("/config", postWebValues, 64 * 2);
+  configPOSTHandler->setMethod(HTTP_POST);
+  configPOSTHandler->setMaxContentLength(64 * 2);
+  server.addHandler(configPOSTHandler);
+  
   //Now that setup is complete, start the web server.
   server.onNotFound(notFound);
   server.begin();
+
+  drawMenu();
 }
 
 
@@ -111,6 +122,7 @@ void loop() {
   if(doConfigUpdate)
   {
     saveConfigToEEPROM();
+    doConfigUpdate = false;
   }
   
   if(doCall)
