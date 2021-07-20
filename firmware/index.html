@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type "text/css" href=style.css>
+  <title>Shadow Clock Configuration</title>
+</head>
+<body style="margin:0" style="padding:0">
+  <table cellpadding="3" cellspacing="0" align="center">
+    <colgroup>
+      <col style="width:50%">
+    </colgroup>
+<!--Form for data input of clock configuration values -->
+    <form name="forms" id="forms">
+      <tr>
+        <th colspan="2">
+          <h2>Nokia 3310 Configuration</h2>
+        </th>
+      </tr>
+      <tr>
+        <th colspan="2">
+          <h3>Settings:</h3>
+        <th>
+      </tr>
+      <tr>
+        <th colspan="2">
+          <h4>Adjust these settings and then press the submit button to send them to the phone.</h4>
+        </th>
+      </tr>
+      <tr>
+        <td>Contrast:</td>
+        <td style="text-align:center">
+          <select id="ct" name="ct">
+            <option value="0">0</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="40">40</option>
+            <option value="50">50</option>
+            <option value="60">60</option>
+            <option value="70">70</option>
+            <option value="80">80</option>
+            <option value="90">90</option>
+            <option value="100">100</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Ring Count:</td>
+        <td style="text-align:center">
+          <select id="rc" name="rc">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Battery Level:</td>
+        <td style="text-align:center">
+          <select id="bl" name="bl">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Signal Level:</td>
+        <td style="text-align:center">
+          <select id="sl" name="sl">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Hours:</td>
+        <td style="text-align:center">
+          <select id="th" name="th">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Minutes:</td>
+        <td style="text-align:center">
+          <select id="tm" name="tm">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+            <option value="31">31</option>
+            <option value="32">32</option>
+            <option value="33">33</option>
+            <option value="34">34</option>
+            <option value="35">35</option>
+            <option value="36">36</option>
+            <option value="37">37</option>
+            <option value="38">38</option>
+            <option value="39">39</option>
+            <option value="40">40</option>
+            <option value="41">41</option>
+            <option value="42">42</option>
+            <option value="43">43</option>
+            <option value="44">44</option>
+            <option value="45">45</option>
+            <option value="46">46</option>
+            <option value="47">47</option>
+            <option value="48">48</option>
+            <option value="49">49</option>
+            <option value="50">50</option>
+            <option value="51">51</option>
+            <option value="52">52</option>
+            <option value="53">53</option>
+            <option value="54">54</option>
+            <option value="55">55</option>
+            <option value="56">56</option>
+            <option value="57">57</option>
+            <option value="58">58</option>
+            <option value="59">59</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Phone Number:</td>
+        <td style="text-align:center"><input type="text" id="pn" name="pn" style="width:126px"></td>
+      </tr>
+      <tr>
+        <td>Caller ID:</td>
+        <td style="text-align:center"><input type="text" id="ci" name="ci" style="width:126px"></td>
+      </tr>
+      <tr>
+        <td style="text-align:center" colspan="2"><button class="mybutton" type="submit">Submit</button></td>
+      </tr>
+    </form>
+    <tr>
+      <th colspan="2">
+        <h3>Make Call:</h3>
+      <th>
+    </tr>
+    <tr>
+      <th colspan="2">
+        <h4>Press this button to have the Nokia 3310 make a "call"</h4>
+      </th>
+    </tr>
+    <tr>
+      <td colspan="2" style="text-align:center"><input type="button" value="Make Call" id="callButton" style="width:150px" onclick="makeCall()"></td>
+    </tr>
+  </table>
+
+  <script>
+    // get the form element from dom
+    const formElement = document.querySelector('form#forms');
+
+    // convert the form to JSON
+    const getFormJSON = (form) => {
+      const data = new FormData(form);
+      return Array.from(data.keys()).reduce((result, key) => {
+        result[key] = data.get(key);
+        return result;
+      }, {});
+    };
+
+    // handle the form submission event, prevent default form behaviour, check validity, convert form to JSON
+    const handler = (event) => {
+      event.preventDefault();
+      const valid = formElement.reportValidity();
+      if (valid) {
+        const result = getFormJSON(formElement);
+        var request = new XMLHttpRequest();
+        request.open("POST", "/config", true);
+        request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        request.send(JSON.stringify(result));
+      }
+    }
+    function makeCall(){
+      request = new XMLHttpRequest();
+      if (request) {
+        request.open("PUT", "/call", true);
+        request.send();
+      }
+    }
+
+
+    formElement.addEventListener("submit", handler);
+  </script>
+</body>
+</html>

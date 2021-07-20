@@ -1,0 +1,54 @@
+th, td{
+  text-align:left;
+  color:white;
+}
+
+h2{
+  text-align:center;
+  margin-top:15px;
+  margin-bottom:2px;
+  color:#FECE35;
+}
+
+h3{
+  margin-top:30px;
+  margin-bottom:2px;
+  color:#FECE35;
+}
+
+h4{
+  margin-top:2px;
+  margin-bottom:10px;
+  color:#8B8B8B;
+}
+
+input{
+  margin-top:1px;
+  margin-bottom:2px;
+  margin-left:0px;
+  align:left;
+  width:126px;
+}
+
+select{
+  margin-top:1px;
+  margin-bottom:2px;
+  margin-left:0px;
+  align:left;
+  width:130px;
+}
+
+table{
+  max-width: 400px;
+  border-radius: 25px;
+  background-color:#3a3a3a;
+  border: 20px solid#3a3a3a;
+}
+
+button{
+  margin-top:10px;
+  margin-bottom:2px;
+  width:150px;
+  align:center;
+  text-align:center;
+}
