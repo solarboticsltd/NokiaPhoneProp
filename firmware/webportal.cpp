@@ -35,30 +35,40 @@ void getWebValues(AsyncWebServerRequest *request)
 //Recieve nokia settings from the webpage and store them in memory
 void postWebValues(AsyncWebServerRequest *request, JsonVariant &json) {
   Serial.println("WEB: Web Data Sent");
-
+  
   //If the correct keys are in the JSON object, validate their values and store them in the config struct
   if(json.containsKey("ct")){
-    verifyValue<int>(json,"ct", &configuration.contrast, 0, 100);
+    configuration.contrast = json["ct"].as<int>();
   }
 
   if(json.containsKey("rc")){
-    verifyValue<int>(json,"rc", &configuration.ringCount, 1, 20);
+    configuration.ringCount = json["rc"].as<int>();
   }
 
   if(json.containsKey("bl")){
-    verifyValue<int>(json,"bl", &configuration.batLevel, 0, 4);
+    configuration.batLevel = json["bl"].as<int>();
   }
 
   if(json.containsKey("sl")){
-    verifyValue<int>(json,"sl", &configuration.sigLevel, 0, 4);
+    configuration.sigLevel = json["sl"].as<int>();
   }
 
   if(json.containsKey("th")){
-    verifyValue<int>(json,"th", &configuration.hours, 0, 23);
+      configuration.hours = json["th"].as<int>();
   }
 
   if(json.containsKey("tm")){
-    verifyValue<int>(json,"tm", &configuration.minutes, 0, 59);
+    String tempMinute = "0";
+    
+    if(json["tm"].as<String>().length() < 2)
+    {
+      tempMinute += json["tm"].as<String>();
+    }
+    else
+    {
+      tempMinute = json["tm"].as<String>();
+    }
+    configuration.minutes = tempMinute.toInt();
   }
 
   if(json.containsKey("pn")){
@@ -78,7 +88,16 @@ void postWebValues(AsyncWebServerRequest *request, JsonVariant &json) {
       cID.toCharArray(configuration.callID, cID.length()+1);
     }
   }   
-
+  Serial.println("Config Values");
+  Serial.println("Contrast: " + String(configuration.contrast));
+  Serial.println("Ring Count: " + String(configuration.ringCount));
+  Serial.println("Bat Level: " + String(configuration.batLevel));
+  Serial.println("Sig Level: " + String(configuration.sigLevel));
+  Serial.println("Hours " + String(configuration.hours));
+  Serial.println("Minutes: " + String(configuration.minutes));
+  Serial.println("Phone Number: " + String(configuration.phoneNumber));
+  Serial.println("Caller ID: " + String(configuration.callID));
+    
   //Raise the update flag so the eeprom is updated with the config values
   doConfigUpdate = true;
   //Send the config values back to the webpage
