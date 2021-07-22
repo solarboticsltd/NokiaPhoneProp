@@ -11,6 +11,7 @@ extern const String DEFAULT_CALLER_ID;
 struct config_t
 {
   unsigned long checksum;
+  int lights = 1;
   int vibration = 1;
   int contrast = 50;
   int ringCount = 8;

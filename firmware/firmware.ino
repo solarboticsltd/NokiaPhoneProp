@@ -39,7 +39,7 @@ DNSServer dns;
 //Define the Phone LED count, data pin, LED brightness levels,
 //and FastLED object.
 #define NUM_LEDS 60
-#define DATA_PIN 12
+#define DATA_PIN D0
 #define BRIGHT 255
 #define DIM 64
 CRGB leds[NUM_LEDS];
@@ -87,24 +87,14 @@ const char index_html[] PROGMEM = R"rawliteral(
         </th>
       </tr>
       <tr>
-        <td>Contrast:</td>
+        <td>Vibration:</td>
         <td style="text-align:center">
-          <select id="ct" name="ct">
+          <select id="vb" name="vb">
             <option value="0">0</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="30">30</option>
-            <option value="40">40</option>
-            <option value="50">50</option>
-            <option value="60">60</option>
-            <option value="70">70</option>
-            <option value="80">80</option>
-            <option value="90">90</option>
-            <option value="100">100</option>
+            <option value="1">1</option>
           </select>
         </td>
       </tr>
-      <tr>
         <td>Ring Count:</td>
         <td style="text-align:center">
           <select id="rc" name="rc">
@@ -263,6 +253,15 @@ const char index_html[] PROGMEM = R"rawliteral(
         <td style="text-align:center"><input type="text" id="ci" name="ci" style="width:126px"></td>
       </tr>
       <tr>
+        <td>Lights:</td>
+        <td style="text-align:center">
+          <select id="lt" name="lt">
+            <option value="0">0</option>
+            <option value="1">1</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
         <td style="text-align:center" colspan="2"><button class="mybutton" type="submit">Submit</button></td>
       </tr>
     </form>
@@ -319,7 +318,6 @@ const char index_html[] PROGMEM = R"rawliteral(
   </script>
 </body>
 </html>
-
 
 )rawliteral";
 
@@ -390,6 +388,13 @@ void setup() {
   display.setFont(&nokiafc224pt7b);
   display.clearDisplay();   // clears the screen and buffer
 
+  //Output pins for the Vibration and Backlight controls
+  pinMode(D3, OUTPUT);//Lights
+  pinMode(D4, OUTPUT);//Vibration
+
+  digitalWrite(D3, HIGH); //Lights
+  digitalWrite(D4, LOW); //Vibration
+
   //Initialize the FastLED object that will handle the phone LEDs               
   FastLED.addLeds<WS2812B, DATA_PIN, RGB>(leds, NUM_LEDS);
   //Set LED brightness to "Bright".
@@ -426,9 +431,9 @@ void setup() {
   server.on("/config", HTTP_GET, getWebValues);
   server.on("/call", HTTP_PUT, putCall);
 
-  AsyncCallbackJsonWebHandler* configPOSTHandler = new AsyncCallbackJsonWebHandler("/config", postWebValues, 64 * 2);
+  AsyncCallbackJsonWebHandler* configPOSTHandler = new AsyncCallbackJsonWebHandler("/config", postWebValues, 128 * 2);
   configPOSTHandler->setMethod(HTTP_POST);
-  configPOSTHandler->setMaxContentLength(64 * 2);
+  configPOSTHandler->setMaxContentLength(128 * 2);
   server.addHandler(configPOSTHandler);
   
   //Now that setup is complete, start the web server.
@@ -446,6 +451,8 @@ void loop() {
   if(doConfigUpdate)
   {
     saveConfigToEEPROM();
+    drawConfig();
+    delay(2000);
     drawMenu();
     doConfigUpdate = false;
   }
@@ -546,7 +553,18 @@ void drawText(String text, int x, int y)
 
 void drawTime(int hours, int minutes, int x, int y)
 {
-  String displayTime = String(hours) + ":" + String(minutes);
+  String tempHours = String(hours);
+  String tempMinutes = String(minutes);
+
+  if(hours < 10)
+  {
+    tempHours = "0" + String(hours);
+  }
+  if(minutes < 10)
+  {
+    tempMinutes = "0" + String(minutes);
+  }
+  String displayTime = tempHours + ":" + tempMinutes;
 
   display.setTextSize(1);
   display.setTextColor(BLACK);
@@ -567,32 +585,87 @@ void drawMenu(){
 
 void drawCall(){
   
-  for(int i = 1; i < (configuration.ringCount * 2 + 1); i++)
+  int vibeTime[] = {600, 200, 600, 1000};
+  int ringTimer = millis();
+  int vibeTimer = millis();
+  int vibeCounter = 0;
+  bool vibeFlag = true;
+  bool ringFlag = true;
+  int callTime = millis();
+  
+  while((millis() - callTime) < ((vibeTime[0]+vibeTime[1]+vibeTime[2]+vibeTime[3]) * configuration.ringCount))
   {
-    display.clearDisplay();
-    drawBattery(configuration.batLevel);
-    drawSignal(configuration.sigLevel);
-    drawTime(configuration.hours, configuration.minutes, 50, 7);
-    drawText(String(configuration.callID), 6, 31);
-    drawText("Answer", 25, 45);
+    Serial.println("Ringing");
     
-    if(i % 2 != 0)
+    if(millis() - ringTimer > 400)
     {
-      drawText(String(configuration.phoneNumber), 12, 15);
-      
+      Serial.println("Flipping Ring Flag");
+      ringTimer = millis();
+      ringFlag = !ringFlag;
+    }
+
+    if(millis() - vibeTimer > vibeTime[vibeCounter])
+    {
+      Serial.println("Flipping Vibe Flag");
+      vibeTimer = millis();
+      vibeCounter++;
+      if(vibeCounter > 3)
+      {
+        vibeCounter = 0;
+      }
+      vibeFlag = !vibeFlag;
     }
     
+    if(ringFlag == true)
+    {
+      display.clearDisplay();
+      drawBattery(configuration.batLevel);
+      drawSignal(configuration.sigLevel);
+      drawTime(configuration.hours, configuration.minutes, 50, 7);
+      drawText(String(configuration.callID), 6, 31);
+      drawText("Answer", 25, 45);
+      drawText(String(configuration.phoneNumber), 8, 15);
+
+      if(configuration.lights == 1)
+      {
+        digitalWrite(D3, LOW);
+      }
+    }
+    else
+    {
+      display.clearDisplay();
+      drawBattery(configuration.batLevel);
+      drawSignal(configuration.sigLevel);
+      drawTime(configuration.hours, configuration.minutes, 50, 7);
+      drawText(String(configuration.callID), 6, 31);
+      drawText("Answer", 25, 45);
+
+      digitalWrite(D3, HIGH);
+    }
+
+    if(vibeFlag == true && configuration.vibration == 1)
+    {
+      digitalWrite(D4, HIGH);
+    }
+    else
+    {
+      digitalWrite(D4, LOW);
+    }
+
+    
     display.display();
-    delay(400);
+    delay(100);
   }
-  
+
+  digitalWrite(D4, LOW);
+  digitalWrite(D3, HIGH);
   drawMenu();
 }
 
 void drawConfig()
 {
   display.clearDisplay();
-  drawText("Contrast: " + String(configuration.contrast), 0, 6);
+  drawText("Vibration: " + String(configuration.vibration), 0, 6);
   drawText("Ring Count: " + String(configuration.ringCount), 0, 14);
   drawText("BatLevel: " + String(configuration.batLevel), 0, 22);
   drawText("SigLevel: " + String(configuration.sigLevel), 0, 30);
@@ -603,6 +676,7 @@ void drawConfig()
   
   display.clearDisplay();
   drawText("ID: " + String(configuration.callID), 0, 6);
+  drawText("Lights: " + String(configuration.lights), 0, 14);
   display.display();
   delay(2000);
   

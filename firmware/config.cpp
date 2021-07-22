@@ -63,7 +63,8 @@ void factoryResetEEPROM(){
 
   Serial.println("FACTORY RESET: Resetting config and commiting to eeprom");
   
-  configuration.virbation = 1;
+  configuration.lights = 1;
+  configuration.vibration = 1;
   configuration.contrast = 50;
   configuration.ringCount = 8;
   configuration.batLevel = 4;

@@ -11,10 +11,12 @@ void getWebValues(AsyncWebServerRequest *request)
   Serial.println("WEB: Config Data Requested");
 
   //Create a JSON Object for the response payload
-  const int capacity = JSON_OBJECT_SIZE(8 * 2);
+  const int capacity = JSON_OBJECT_SIZE(10 * 2);
   StaticJsonDocument<capacity>doc;
 
   //Fill JSON object with config settings
+  doc["lt"] = configuration.lights;
+  doc["vb"] = configuration.vibration;
   doc["ct"] = configuration.contrast;
   doc["rc"] = configuration.ringCount;
   doc["bl"] = configuration.batLevel;
@@ -37,6 +39,14 @@ void postWebValues(AsyncWebServerRequest *request, JsonVariant &json) {
   Serial.println("WEB: Web Data Sent");
   
   //If the correct keys are in the JSON object, validate their values and store them in the config struct
+  if(json.containsKey("lt")){
+    configuration.lights = json["lt"].as<int>();
+  }
+  
+  if(json.containsKey("vb")){
+    configuration.vibration = json["vb"].as<int>();
+  }
+  
   if(json.containsKey("ct")){
     configuration.contrast = json["ct"].as<int>();
   }
@@ -89,6 +99,8 @@ void postWebValues(AsyncWebServerRequest *request, JsonVariant &json) {
     }
   }   
   Serial.println("Config Values");
+  Serial.println("Lights: " + String(configuration.lights));
+  Serial.println("Vibration: " + String(configuration.vibration));
   Serial.println("Contrast: " + String(configuration.contrast));
   Serial.println("Ring Count: " + String(configuration.ringCount));
   Serial.println("Bat Level: " + String(configuration.batLevel));
