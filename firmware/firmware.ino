@@ -1,7 +1,6 @@
 //******************************************************************************//
 //************************** Nokia Phone Firmware ******************************//
 //******************************************************************************//
-// Solarbotics Ltd, June 2021, May 2022
 //Arduino Library - standard
 #include <Arduino.h>
 
@@ -92,7 +91,7 @@ const char index_html[] PROGMEM = R"rawliteral(
         <td style="text-align:center">
           <select id="vb" name="vb">
             <option value="0">0</option>
-            <option value="1">1</option>
+            <option value="1" selected>1</option>
           </select>
         </td>
       </tr>
@@ -102,7 +101,7 @@ const char index_html[] PROGMEM = R"rawliteral(
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
-            <option value="3">3</option>
+            <option value="3" selected>3</option>
             <option value="4">4</option>
             <option value="5">5</option>
             <option value="6">6</option>
@@ -129,7 +128,7 @@ const char index_html[] PROGMEM = R"rawliteral(
           <select id="bl" name="bl">
             <option value="0">0</option>
             <option value="1">1</option>
-            <option value="2">2</option>
+            <option value="2" selected>2</option>
             <option value="3">3</option>
             <option value="4">4</option>
           </select>
@@ -142,7 +141,7 @@ const char index_html[] PROGMEM = R"rawliteral(
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
-            <option value="3">3</option>
+            <option value="3" selected>3</option>
             <option value="4">4</option>
           </select>
         </td>
@@ -161,7 +160,7 @@ const char index_html[] PROGMEM = R"rawliteral(
             <option value="7">7</option>
             <option value="8">8</option>
             <option value="9">9</option>
-            <option value="10">10</option>
+            <option value="10" selected>10</option>
             <option value="11">11</option>
             <option value="12">12</option>
             <option value="13">13</option>
@@ -191,7 +190,7 @@ const char index_html[] PROGMEM = R"rawliteral(
             <option value="6">6</option>
             <option value="7">7</option>
             <option value="8">8</option>
-            <option value="9">9</option>
+            <option value="9" selected>9</option>
             <option value="10">10</option>
             <option value="11">11</option>
             <option value="12">12</option>
@@ -259,37 +258,6 @@ const char index_html[] PROGMEM = R"rawliteral(
           <select id="lt" name="lt">
             <option value="0">0</option>
             <option value="1">1</option>
-          </select>
-        </td>
-      </tr>
-		<td>Contrast:</td>
-        <td style="text-align:center">
-          <select id="ct" name="ct">
-				<option value="10">10</option>
-				<option value="20">20</option>
-				<option value="30">30</option>
-				<option value="40">40</option>
-				<option value="50" selected>50</option>
-				<option value="60">60</option>
-				<option value="70">70</option>
-				<option value="80">80</option>
-				<option value="90">90</option>
-				<option value="100">100</option>
-				<option value="110">110</option>
-				<option value="120">120</option>
-				<option value="130">130</option>
-				<option value="140">140</option>
-				<option value="150">150</option>
-				<option value="160">160</option>
-				<option value="170">170</option>
-				<option value="180">180</option>
-				<option value="190">190</option>
-				<option value="200">200</option>
-				<option value="210">210</option>
-				<option value="220">220</option>
-				<option value="230">230</option>
-				<option value="240">240</option>
-				<option value="250">250</option>
           </select>
         </td>
       </tr>
@@ -440,14 +408,6 @@ void setup() {
   //Begin the eeprom communication with an allocation of 512 bytes.
   EEPROM.begin(512);
   loadConfigFromEEPROM();
-  
-  // Set display contrast
-  if(configuration.contrast)
-		{
-		  display.setContrast(configuration.contrast);
-		  display.display();
-		  delay(100);
-		}
 
 
 
@@ -624,7 +584,6 @@ void drawMenu(){
 }
 
 void drawCall(){
-  
   int vibeTime[] = {600, 200, 600, 1000};
   int ringTimer = millis();
   int vibeTimer = millis();
@@ -632,7 +591,7 @@ void drawCall(){
   bool vibeFlag = true;
   bool ringFlag = true;
   int callTime = millis();
-  
+ 
   while((millis() - callTime) < ((vibeTime[0]+vibeTime[1]+vibeTime[2]+vibeTime[3]) * configuration.ringCount))
   {
     Serial.println("Ringing");
