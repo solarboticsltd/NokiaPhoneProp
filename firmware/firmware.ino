@@ -262,6 +262,37 @@ const char index_html[] PROGMEM = R"rawliteral(
           </select>
         </td>
       </tr>
+		<td>Contrast:</td>
+        <td style="text-align:center">
+          <select id="ct" name="ct">
+				<option value="10">10</option>
+				<option value="20">20</option>
+				<option value="30">30</option>
+				<option value="40">40</option>
+				<option value="50" selected>50</option>
+				<option value="60">60</option>
+				<option value="70">70</option>
+				<option value="80">80</option>
+				<option value="90">90</option>
+				<option value="100">100</option>
+				<option value="110">110</option>
+				<option value="120">120</option>
+				<option value="130">130</option>
+				<option value="140">140</option>
+				<option value="150">150</option>
+				<option value="160">160</option>
+				<option value="170">170</option>
+				<option value="180">180</option>
+				<option value="190">190</option>
+				<option value="200">200</option>
+				<option value="210">210</option>
+				<option value="220">220</option>
+				<option value="230">230</option>
+				<option value="240">240</option>
+				<option value="250">250</option>
+          </select>
+        </td>
+      </tr>
       <tr>
         <td style="text-align:center" colspan="2"><button class="mybutton" type="submit">Submit</button></td>
       </tr>
@@ -409,6 +440,14 @@ void setup() {
   //Begin the eeprom communication with an allocation of 512 bytes.
   EEPROM.begin(512);
   loadConfigFromEEPROM();
+  
+  // Set display contrast
+  if(configuration.contrast)
+		{
+		  display.setContrast(configuration.contrast);
+		  display.display();
+		  delay(100);
+		}
 
 
 
